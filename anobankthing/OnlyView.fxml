@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.26"
+           prefHeight="520.0" prefWidth="980.0"
+           xmlns="http://javafx.com/javafx/17.0.12"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.anobankthing.StartUpController">
+
+    <fx:define>
+        <ToggleGroup fx:id="roleGroupLogin"/>
+        <ToggleGroup fx:id="roleGroupSignup"/>
+    </fx:define>
+
+    <items>
+
+        <!-- ================= LEFT SIDEBAR ================= -->
+        <VBox spacing="14.0" prefWidth="240.0" style="-fx-background-color: #101828;">
+            <padding>
+                <Insets top="20" right="18" bottom="20" left="18"/>
+            </padding>
+
+            <!-- App name -->
+            <Label text="AnoBankThing"
+                   style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+            <!-- Spacer pushes status + logout to bottom -->
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <!-- Bottom section -->
+            <VBox spacing="10">
+                <Label text="Status"
+                       style="-fx-text-fill: #98A2B3; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+
+                <Label fx:id="TxtStatus"
+                       text="Not Logged In"
+                       wrapText="true"
+                       style="-fx-text-fill: #D0D5DD; -fx-font-size: 13px;"/>
+
+                <Button fx:id="BtnLogOut"
+                        text="Logout"
+                        mnemonicParsing="false"
+                        onAction="#BtnLogOutClick"
+                        maxWidth="1.7976931348623157E308"
+                        style="-fx-background-color: #D92D20; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10 12;"/>
+            </VBox>
+        </VBox>
+
+        <!-- ================= RIGHT CONTENT ================= -->
+        <BorderPane style="-fx-background-color: #F7F9FC;">
+            <top>
+                <HBox spacing="10" alignment="CENTER_LEFT"
+                      style="-fx-background-color: white; -fx-border-color: #EAECF0; -fx-border-width: 0 0 1 0;">
+                    <padding>
+                        <Insets top="16" right="18" bottom="16" left="18"/>
+                    </padding>
+
+                    <Label text="Bank Dashboard"
+                           style="-fx-text-fill: #101828; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <Label text="• Secure access and account actions"
+                           style="-fx-text-fill: #667085; -fx-font-size: 12px;"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Label text="OOAD Assignment"
+                           style="-fx-text-fill: #344054; -fx-font-size: 12px; -fx-background-color: #EEF2FF; -fx-padding: 6 10; -fx-background-radius: 999;"/>
+                </HBox>
+            </top>
+
+            <center>
+                <StackPane>
+                    <padding>
+                        <Insets top="18" right="18" bottom="18" left="18"/>
+                    </padding>
+
+                    <!-- ================= LOGIN / SIGN UP ================= -->
+                    <TabPane fx:id="TabPaneLogin" tabClosingPolicy="UNAVAILABLE" maxWidth="880" maxHeight="520"
+                             style="-fx-background-color: transparent;">
+
+                        <tabs>
+
+                            <!-- LOGIN TAB -->
+                            <Tab text="Login">
+                                <content>
+                                    <VBox spacing="14" maxWidth="620"
+                                          style="-fx-background-color: white; -fx-background-radius: 14; -fx-border-radius: 14; -fx-border-color: #EAECF0; -fx-padding: 18;">
+
+                                        <Label fx:id="LabelLogin"
+                                               text="Login"
+                                               style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #101828;"/>
+
+                                        <Label text="Enter your details to continue."
+                                               style="-fx-text-fill: #667085; -fx-font-size: 12px;"/>
+
+                                        <Separator/>
+
+                                        <GridPane hgap="12" vgap="12">
+                                            <columnConstraints>
+                                                <ColumnConstraints percentWidth="35"/>
+                                                <ColumnConstraints percentWidth="65"/>
+                                            </columnConstraints>
+
+                                            <Label text="First Name" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                            <TextField fx:id="TxtFieldFirstName"
+                                                       promptText="Enter first name"
+                                                       GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                                            <Label text="Surname" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                            <TextField fx:id="TxtFieldSurname"
+                                                       promptText="Enter surname"
+                                                       GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                                            <Label text="Password" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+
+                                            <StackPane GridPane.rowIndex="2" GridPane.columnIndex="1">
+                                                <PasswordField fx:id="PwdLoginHidden" promptText="Enter password"/>
+                                                <TextField fx:id="TxtFieldPassword"
+                                                           promptText="Enter password"
+                                                           visible="false" managed="false"/>
+                                            </StackPane>
+
+                                            <Label text="" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                            <CheckBox fx:id="ChkShowPasswordLogin"
+                                                      text="Show password"
+                                                      onAction="#onToggleShowPasswordLogin"
+                                                      GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                                            <Label text="Role" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                            <HBox spacing="12" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                                                <RadioButton fx:id="RadioLoginCustomer" text="Customer" selected="true" toggleGroup="$roleGroupLogin"/>
+                                                <RadioButton fx:id="RadioLoginManager" text="Manager" toggleGroup="$roleGroupLogin"/>
+                                            </HBox>
+                                        </GridPane>
+
+                                        <HBox spacing="12" alignment="CENTER_RIGHT">
+                                            <Button fx:id="BtnLogin"
+                                                    text="Login"
+                                                    mnemonicParsing="false"
+                                                    onAction="#BtnLoginClick"
+                                                    style="-fx-background-color: #2563EB; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10 14;"/>
+                                        </HBox>
+                                    </VBox>
+                                </content>
+                            </Tab>
+
+                            <!-- SIGN UP TAB -->
+                            <Tab text="Sign up">
+                                <content>
+                                    <VBox spacing="14" maxWidth="720"
+                                          style="-fx-background-color: white; -fx-background-radius: 14; -fx-border-radius: 14; -fx-border-color: #EAECF0; -fx-padding: 18;">
+
+                                        <Label text="Sign up"
+                                               style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #101828;"/>
+
+                                        <Label text="Choose role and fill in the required details."
+                                               style="-fx-text-fill: #667085; -fx-font-size: 12px;"/>
+
+                                        <Separator/>
+
+                                        <GridPane hgap="12" vgap="12">
+                                            <columnConstraints>
+                                                <ColumnConstraints percentWidth="35"/>
+                                                <ColumnConstraints percentWidth="65"/>
+                                            </columnConstraints>
+
+                                            <Label text="Role" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                            <HBox spacing="12" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                                                <RadioButton fx:id="RadioSignupCustomer" text="Customer" selected="true" toggleGroup="$roleGroupSignup"/>
+                                                <RadioButton fx:id="RadioSignupManager" text="Manager" toggleGroup="$roleGroupSignup"/>
+                                            </HBox>
+
+                                            <Label text="First Name" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                            <TextField fx:id="TxtFNameNewUser" promptText="Enter first name"
+                                                       GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                                            <Label text="Surname" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                            <TextField fx:id="TxtSNameNewUser" promptText="Enter surname"
+                                                       GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                                            <Label text="Password" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                            <StackPane GridPane.rowIndex="3" GridPane.columnIndex="1">
+                                                <PasswordField fx:id="PwdSignupHidden" promptText="Create a password"/>
+                                                <TextField fx:id="TxtPasswordNewUser"
+                                                           promptText="Create a password"
+                                                           visible="false" managed="false"/>
+                                            </StackPane>
+
+                                            <Label text="" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                            <CheckBox fx:id="ChkShowPasswordSignup"
+                                                      text="Show password"
+                                                      onAction="#onToggleShowPasswordSignup"
+                                                      GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                                            <Label fx:id="LabelAddressNewUser" text="Address" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                            <TextField fx:id="TxtAddressNewUser" promptText="Enter address"
+                                                       GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                                            <Label fx:id="LabelBankIdNewUser" text="Bank Id" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                                            <TextField fx:id="TxtBankIdNewUser" promptText="Enter bank id"
+                                                       GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                                        </GridPane>
+
+                                        <HBox spacing="12" alignment="CENTER_RIGHT">
+                                            <Button fx:id="BtnNewUser"
+                                                    text="Sign up"
+                                                    mnemonicParsing="false"
+                                                    onAction="#BtnNewUserClick"
+                                                    style="-fx-background-color: #16A34A; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10 14;"/>
+                                        </HBox>
+                                    </VBox>
+                                </content>
+                            </Tab>
+
+                        </tabs>
+                    </TabPane>
+
+                    <!-- ================= CUSTOMER AREA ================= -->
+                    <TabPane fx:id="TabPaneCustomer"
+                             prefHeight="440.0" prefWidth="641.0"
+                             tabClosingPolicy="UNAVAILABLE"
+                             visible="false">
+
+                        <tabs>
+                            <Tab text="Home">
+                                <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                        <children>
+                                            <ListView fx:id="ListCustomerAccounts" layoutX="18.0" layoutY="45.0" prefHeight="229.0" prefWidth="461.0"/>
+                                            <Label layoutX="18.0" layoutY="14.0" text="List Of Your Accounts"/>
+                                        </children>
+                                    </AnchorPane>
+                                </content>
+                            </Tab>
+
+                            <Tab text="Create New Account">
+                                <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                        <children>
+                                            <Label layoutX="120.0" layoutY="43.0" text="Account Number"/>
+                                            <TextField fx:id="TxtAccNumberNewAcc" layoutX="233.0" layoutY="39.0" promptText="2167"/>
+
+                                            <Label layoutX="120.0" layoutY="72.0" text="Balance"/>
+                                            <TextField fx:id="TxtBalanceNewAcc" layoutX="233.0" layoutY="68.0" promptText="6769.42"/>
+
+                                            <Label layoutX="120.0" layoutY="105.0" text="Branch"/>
+                                            <TextField fx:id="TxtBranchNewAcc" layoutX="233.0" layoutY="101.0" promptText="FNB Gaborone"/>
+
+                                            <Label layoutX="86.0" layoutY="126.0" text="Enter details below ONLY for cheque account" textFill="#868686"/>
+
+                                            <Label layoutX="122.0" layoutY="144.0" text="Company Name"/>
+                                            <TextField fx:id="TxtCompanyNameNewAcc" layoutX="233.0" layoutY="140.0" promptText="Company name"/>
+
+                                            <Label layoutX="122.0" layoutY="173.0" text="Company Address"/>
+                                            <TextField fx:id="TxtCompanyAddressNewAcc" layoutX="233.0" layoutY="169.0" promptText="Company address"/>
+
+                                            <Button fx:id="BtnNewAccSvgs" layoutX="16.0" layoutY="215.0" mnemonicParsing="false" onAction="#BtnNewAccSvgsClick" text="Create Savings Account"/>
+                                            <Button fx:id="BtnNewAccInvs" layoutX="167.0" layoutY="215.0" mnemonicParsing="false" onAction="#BtnNewAccInvsClick" text="Create Investment Account"/>
+                                            <Button fx:id="BtnNewAccCheque" layoutX="336.0" layoutY="215.0" mnemonicParsing="false" onAction="#BtnNewAccChequeClick" text="Create Cheque Account"/>
+                                        </children>
+                                    </AnchorPane>
+                                </content>
+                            </Tab>
+
+                            <Tab text="Deposit and Withdraw">
+                                <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                        <children>
+                                            <Label layoutX="133.0" layoutY="59.0" text="Account Number"/>
+                                            <TextField fx:id="TxtAccNumberDW" layoutX="238.0" layoutY="55.0" promptText="2167"/>
+
+                                            <Label layoutX="137.0" layoutY="99.0" text="Amount"/>
+                                            <TextField fx:id="TxtBalanceDW" layoutX="238.0" layoutY="95.0" promptText="100.00"/>
+
+                                            <Button fx:id="BtnWithdraw" layoutX="132.0" layoutY="144.0" mnemonicParsing="false" onAction="#BtnWithdrawClick" text="Withdraw"/>
+                                            <Button fx:id="BtnDeposit" layoutX="336.0" layoutY="144.0" mnemonicParsing="false" onAction="#BtnDepositClick" text="Deposit"/>
+
+                                            <Label layoutX="14.0" layoutY="260.0" text="Note: Can NOT withdraw from savings account" textFill="#868686"/>
+                                        </children>
+                                    </AnchorPane>
+                                </content>
+                            </Tab>
+
+                            <Tab text="Delete Account">
+                                <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                        <children>
+                                            <Label layoutX="133.0" layoutY="59.0" text="Account Number"/>
+                                            <TextField fx:id="TxtAccNumberDeleteAcc" layoutX="238.0" layoutY="55.0" promptText="2167"/>
+                                            <Button fx:id="BtnDeleteAcc" layoutX="289.0" layoutY="144.0" mnemonicParsing="false" onAction="#BtnDeleteAccClick" text="Delete Account"/>
+                                        </children>
+                                    </AnchorPane>
+                                </content>
+                            </Tab>
+                        </tabs>
+                    </TabPane>
+
+                    <!-- ================= MANAGER AREA ================= -->
+                    <TabPane fx:id="TabPaneBankManager"
+                             prefHeight="461.0" prefWidth="751.0"
+                             tabClosingPolicy="UNAVAILABLE"
+                             visible="false">
+
+                        <tabs>
+                            <Tab text="Home">
+                                <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                        <children>
+                                            <ListView fx:id="ListAllAccs" layoutX="18.0" layoutY="45.0" prefHeight="228.0" prefWidth="460.0"/>
+                                            <Label layoutX="18.0" layoutY="14.0" text="List Of All Accounts"/>
+                                        </children>
+                                    </AnchorPane>
+                                </content>
+                            </Tab>
+
+                            <Tab text="Apply Interest">
+                                <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                        <children>
+                                            <Label layoutX="119.0" layoutY="43.0" text="Account Number"/>
+                                            <TextField fx:id="TxtAccNumberInterest" layoutX="222.0" layoutY="39.0" promptText="2167"/>
+                                            <Button fx:id="BtnApplyInterest" layoutX="228.0" layoutY="80.0" mnemonicParsing="false" onAction="#BtnApplyInterestClick" text="Add Interest to Account"/>
+                                        </children>
+                                    </AnchorPane>
+                                </content>
+                            </Tab>
+                        </tabs>
+                    </TabPane>
+
+                </StackPane>
+            </center>
+        </BorderPane>
+
+    </items>
+</SplitPane>
