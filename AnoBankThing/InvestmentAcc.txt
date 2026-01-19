@@ -1,0 +1,3 @@
+3267;231.525;Absa;Juck
+1333;1982.7675;Stanbic;Juck
+909;525.0;FNB Gabarone;Jill
