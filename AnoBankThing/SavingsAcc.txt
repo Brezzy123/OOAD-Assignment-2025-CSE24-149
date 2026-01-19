@@ -1,5 +1,0 @@
-3213;220.8309154025625;Absa;Juck
-1245;7315.35;Stanbic;Juck
-1922;694.20;Phakalane;D
-6967;2000.0;ABSA North;Juck
-908;60.03;FNB Gabarone;Jill

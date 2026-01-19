@@ -1,4 +1,0 @@
-D;E;F;Adress;2142
-Anotida;Muzimbawake;Ano;New Canada;11505
-Anesu;Fuggerson;BFF;Regular Street 1;33333
-Shepard;Chitamba;Shepard;Tlokweng;22222
